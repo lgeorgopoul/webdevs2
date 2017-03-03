@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+  <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+  <style>
+  body {
+    background-color: #c0c0c0;
+    font-family: 'Baloo', cursive;
+  }
+    #menu {
+      text-align:center;
+      color:blue;
+      font-size:30px;
+    }
+    #search{
+   
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+    }
+    #49, #152, #X49 {
+    text-align: center;
+    border: 1px solid black;
+    }
+        
+    th,td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    
+    }
+    th {
+      background-color:#ADD8E6;
+    }
+   tr:nth-child(even) {
+  background-color: #e3dd5a;
+  }
+  tr:nth-child(odd) {
+    background-color: #3dd61a;
+  }
+   h1{
+     font-size:30px;
+     text-align:center;
+   } 
+   h2, h3 {
+     text-align:center;
+   }
+  </style>
+  
+  <h1>Lane Tech Bus Routes</h1>
+  <h2>Click the CTA logo to see what busses are near their corresponding Lane stops</h2>
+  
+ <div id='menu'>
+      <!--  <label id='select'><input type='checkbox' value='12525'>Addison Eastbound<br>
+        <input type='checkbox' value='152'>Addison Westbound<br>
+        <input type='checkbox' value='49'>Western Southbound<br>
+        <input type='checkbox' value='49'>Western Northbound<br>
+        <input type='checkbox' value='49'>Western Northbound<br>
+        <input type='checkbox' value='49X'>Western Express Southbound<br>
+      <input type='checkbox' value='49X'>Western Express Northbound<br></label>-->
+        
+        <button id='search'><img src="https://pbs.twimg.com/profile_images/1617237207/cta-logo---flattransp.png" style="width:100px;height:100px;"></button>
+ </div> 
+
+ 
+ 
+ 
+ <h2>152- Addison</h2>
+ <table id="152" width='100%'>
+   <tr>
+   
+   <th>Direction</th>
+   <th>Time Left</th>
+   </tr>
+ </table>
+ <h2>49- Western</h2>
+ <table id="49" width='100%'>
+   <tr>
+
+   <th>Direction</th>
+   <th>Time Left</th>
+   </tr>
+ </table>
+ <h2>X49- Western Express</h2>
+ <table id="X49" width='100%'>
+   <tr>
+   
+   <th>Direction</th>
+   <th>Time Left</th>
+   </tr>
+ </table>
+ 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+   
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions";
+          
+            $("#search").on("click", function() {
+          
+         
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "a5dkxHtLiq5uJgDTm95zb9QRa",
+                      
+                      "rt" : "152,49",
+                      "stpid": "12527,12569,8147,8195",
+                      "format":"json",
+              }
+            }).done (function (data) {
+              console.log(data);
+              
+  
+        //http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=a5dkxHtLiq5uJgDTm95zb9QRa&rt=152&stpid=12525
+        //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+        //http://www.transitchicago.com/assets/1/developer_center/cta_Bus_Tracker_API_Developer_Guide_and_Documentation_20160929.pdf
+        //display:inline
+  
+            
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#"+v.rt).append("<tr>"+
+                  
+                  "<td>" + v.rtdir + "</td>"+
+                  "<td>" + v.prdctdn + " minutes</td>"+
+                  "</tr>"
+                  );
+                  
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+ 
+</body>
+</html>
