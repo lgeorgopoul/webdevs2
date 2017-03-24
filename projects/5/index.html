@@ -1,0 +1,615 @@
+<html>
+
+<head>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Holy Week">
+    <link rel="apple-touch-icon" href="https://cdn.iconscout.com/public/images/icon/premium/png-192/easter-gift-egg-festival-relax-3ceb6442cf1907a8-192x192.png">
+    <meta name="msapplication-TileImage" content="https://cdn.iconscout.com/public/images/icon/premium/png-192/easter-gift-egg-festival-relax-3ceb6442cf1907a8-192x192.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
+</head>
+
+<body>
+    
+    <style>
+        .screen {display: none}
+        body{
+            background-color:#ffb3e6;
+            
+        }
+        h1{
+            font-weight:bold;
+        }
+        h1, h2{
+            font-family: 'Ranga', cursive;
+            text-align:center;
+        }
+        h4{
+            font-family: 'Ranga', cursive;
+        }
+        th{
+            font-weight:bold;
+            font-size:20px;
+        }
+        tr {
+            font-weight:17px;
+        }
+        tr,th{
+            text-align:center;
+            font-family: 'Lobster', cursive;
+        }
+       p{
+           text-align:center;
+           font-size:15px;
+       }
+       #ing1, #ing2,  #ing3, #ing4, #ing5{
+            float:left;
+            width:25%;
+            overflow:hidden;
+            text-align:center;
+        }
+        #step1, #step2, #step3, #step4, #step5{
+            float:left;
+            width:75%;
+            overflow:hidden;
+            text-align:center
+        }
+        * {
+              box-sizing: border-box;
+            }
+            
+            /* Remove margins and padding from the list */
+            ul {
+              margin: 0;
+              padding: 0;
+            }
+            
+            /* Style the list items */
+            ul li {
+              cursor: pointer;
+              position: relative;
+              padding: 12px 8px 12px 40px;
+              background: #eee;
+              font-size: 18px;
+              transition: 0.2s;
+              
+              /* make the list items unselectable */
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+            
+            /* Set all odd list items to a different color (zebra-stripes) */
+            ul li:nth-child(odd) {
+              background: #f9f9f9;
+            }
+            
+            /* Darker background-color on hover */
+            ul li:hover {
+              background: #ddd;
+            }
+            
+            /* When clicked on, add a background color and strike out text */
+            ul li.checked {
+              background: #888;
+              color: #fff;
+              text-decoration: line-through;
+            }
+            
+            /* Add a "checked" mark when clicked on */
+            ul li.checked::before {
+              content: '';
+              position: absolute;
+              border-color: #fff;
+              border-style: solid;
+              border-width: 0 2px 2px 0;
+              top: 10px;
+              left: 16px;
+              transform: rotate(45deg);
+              height: 15px;
+              width: 7px;
+            }
+            
+            /* Style the close button */
+            .close {
+              position: absolute;
+              right: 0;
+              top: 0;
+              padding: 12px 16px 12px 16px
+            }
+            
+            .close:hover {
+              background-color: #f44336;
+              color: white;
+            }
+            
+            /* Style the header */
+            .header {
+              background-color: #ffb3e6;
+              padding: 30px 40px;
+              color: white;
+              text-align: center;
+            }
+            
+            /* Clear floats after the header */
+            .header:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+            
+            /* Style the input */
+            input {
+              border: none;
+              width: 75%;
+              padding: 10px;
+              float: left;
+              font-size: 16px;
+            }
+            
+            /* Style the "Add" button */
+            .addBtn {
+              padding: 10px;
+              width: 25%;
+              background: #d9d9d9;
+              color: #555;
+              float: left;
+              text-align: center;
+              font-size: 16px;
+              cursor: pointer;
+              transition: 0.3s;
+            }
+            
+            .addBtn:hover {
+              background-color: #bbb;
+            }
+        
+    </style>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Holy Week</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a id='nav1' class="combo1 mdl-navigation__link" href="#">Schedule</a>
+                    <a id='nav2' class="combo2 mdl-navigation__link" href="#">Menu</a>
+                    <a id='nav3' class="combo3 mdl-navigation__link" href="#">To Do</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Holy Week</span>
+            <nav class="mdl-navigation">
+                <a id='link1' class="combo1 mdl-navigation__link" href="#">Schedule</a>
+                <a id='link2' class="combo2 mdl-navigation__link" href="#">Menu</a>
+                <a id='link3' class="combo3 mdl-navigation__link" href="#">To Do</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="screen page-content" id='screen1'>
+                    <h1>Holy Week Schedule</h1>
+                    <table id='schedule' width='100%'>
+                        <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Event</th>
+                        <th>Time</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        </tr>
+                        <tr>
+                        <td>Palm Sunday</td>
+                        <td>April 10th</td>
+                        <td>Church</td>
+                        <td>9:45 AM-11:30 AM</td>
+                        <td>Reading the Divine Liturgy</td>
+                        <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Painting Eggs Red</td>
+                            <td>2:00 PM-4:30 PM</td>
+                            <td>Hard boil and dye the eggs red with family</td>
+                            <td>Home</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Fish Taco Dinner</td>
+                            <td>5:00 PM-8:30 PM</td>
+                            <td>Keep with our family tradition of eating fish tacos on Palm Sunday</td>
+                            <td>Home</td>
+                        </tr>
+                        <tr>
+                            <td>Holy Monday</td>
+                            <td>April 11th</td>
+                            <td>Church</td>
+                            <td>7:00 PM-8:00 PM</td>
+                            <td>Service of the Nymphios</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td>Holy Tuesday</td>
+                            <td>April 12th</td>
+                            <td>Church</td>
+                            <td>7:00 PM-8:30 PM</td>
+                            <td>Service of the Nymphios, Hymn of Kassiane</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td>Holy Wednesday</td>
+                            <td>April 13th</td>
+                            <td>Church</td>
+                            <td>3:00 PM-4:00 PM</td>
+                            <td>Sacrament of Holy Unction</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>7:00 PM-8:30 PM</td>
+                            <td>Service of the Niptiros and anointing with Holy Unction</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td>Holy Thursday</td>
+                            <td>April 14th</td>
+                            <td>Church</td>
+                            <td>6:00 AM-7:30 AM</td>
+                            <td>Divine Liturgy of St. Basil</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>7:00 PM-9:30 PM</td>
+                            <td>The TWELVE GOSPEL READINGS of the Passion of Christ</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td>Good Friday</td>
+                            <td>April 15th</td>
+                            <td>Church</td>
+                            <td>9:00 AM-11:00 AM</td>
+                            <td>Service of the ROYAL HOURS</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>11:30 AM-2:30 PM</td>
+                            <td>Holy Friday Retreat</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Pick up Meats</td>
+                            <td>12:00 PM</td>
+                            <td>Pick up the lamb and kokretsi</td>
+                            <td><a href='http://google.com/maps?q=42.0181677,-87.80721949999997' target='_blank'>P&S Meats</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>3:00 PM-4:30 PM</td>
+                            <td>Service of the APOKATHILOSIS</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>7:00 PM-10:00 PM</td>
+                            <td>Service of the LAMENTATION/EPITAPHIOS PROCESSION</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td>Holy Saturday/Anastasi</td>
+                            <td>April 16th/Morning April 17th</td>
+                            <td>Preparation</td>
+                            <td>All Day</td>
+                            <td>Prepare food, the house, and the backyard for tomorrow</td>
+                            <td>Home</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>9:00 AM-11:00 AM</td>
+                            <td>Divine Liturgy of St. Basil</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>11:00 PM-11:59 PM</td>
+                            <td>Orthros of the Resurrection</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>12:00 AM-2:00 AM</td>
+                            <td>RESURRECTION/ΑΝΑΣΤΑΣΗΣ Midnight Orthros and Divine Liturgy of Pascha </td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Meal</td>
+                            <td>12:30 AM-1:30 AM</td>
+                            <td>Eating sivrasi and cracking eggs</td>
+                            <td>Home</td>
+                        </tr>
+                        <tr>
+                            <td>Easter</td>
+                            <td>April 17th</td>
+                            <td>Celebration</td>
+                            <td>All Day</td>
+                            <td>Food, Family, and Fun</td>
+                            <td>Home</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Church</td>
+                            <td>11:30 AM-1:00 PM</td>
+                            <td>Agape Service</td>
+                            <td><a href='http://google.com/maps?q=41.9311189,-87.6556347' target='_blank'>St. George Greek Orthodox Church</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="screen page-content" id='screen2'>
+                    <h1>Easter Menu</h1>
+                    <h2>Sivrasi (Lamb-Spinach Dish)</h2>
+                   
+                            <div id='ing1'> 
+                             <h4>Ingredients</h4>
+                  5 lbs spinach<br>
+                10 bunches green onions<br>
+                    4 lbs lamb (cut for stew)<br>
+                    1/2 cup olive oil<br>
+                    Salt and pepper</div>
+                    
+                    <div id='step1'>
+                        <h4>Process</h4>
+                   1. Blanch spinach and green onions.<br>
+                    2. This can be done a few days in advance
+                    <br>
+                    3. Heat oil<br>
+                    4. Sautee lamb until it browns and add spinach and green onions<br>
+                    5. Add 2 tablespoons of tomato,paste. Salt and pepper to taste<br>
+                    6. Add water to cover half of the pot<br>
+                    7. Let it slowly simmer for three hours</div>
+                
+                <h2>Kokoretsi (Lamb Organs)</h2>
+                <div id='ing2'>
+                    <h4>Ingredients</h4>
+                    4 kilos of lamb internal organs, including liver, heart, lungs and kidneys<br>
+                    5 kilos of Offals to wrap it<br>
+                    Oregano<br>
+                    Olive Oil<br>
+                    Lemon
+                </div>
+                <div id='step2'>
+                    <h4>Process</h4>
+                  1. The entrails are washed and cut into small pieces, about 6 cm.<br>
+                    2. After draining the offal,  add salt, pepper and oregano and begin skewering them, putting one piece of liver, heart, kidney, lungs etc. In between two or three pieces, add a piece of caul fat.<br>
+                    3. When finished, wrap it in caul fat and pin one end of the first bowel in the one side of the spit and lengthwise to the other side. You do this backwards and forward several times and then wind the intestine around the skewer. If the bowel reaches its end tie it with the end of the next bowel and continue to wind until all bowels are wrapped and no guts are visible.<br>
+                    4. Kokoretsi is then ready to roast over charcoal together with the Lamb on the spit.<br>
+                    5. You shouldn't start close to the fire but on the upper position, so that it cooks well inside and when it’s half cooked you can bring it closer to the fire.<br>
+                    6. Baste it often with ladolemono, which is the same mixture of Ladolemono (olive oil, lemon and oregano) prepared for the lamb.<br>
+                </div>
+                <h2>Lamb</h2>
+                <div id='ing3'>
+                    <h4>Ingredients</h4>
+                    An entire lamb<br>
+                    Oregano<br>
+                    Olive Oil<br>
+                    Lemon<br>
+                    Garlic<br>
+                    A spit<br>
+                    Charcoal
+                </div>
+                <div id='step3'>
+                    <h4>Process</h4>
+                  1. Cover a table or large work surface with plastic trash bags. Lay the lamb down on its side and rub the insides and outside with the cut sides of two lemons. Brush the lamb with olive oil, then season liberally with sea salt, freshly ground black pepper, dried oregano, rosemary, and parsley.<br>
+                  2. Make small incisions every few inches in the skin using the tip of a paring knife. Insert slices of slivered garlic to flavor the meat. Then flip the lamb over and repeat seasoning process on the other side.<br>
+                  3. Tighen the cavity with twine. Be sure to wash your hands and disinfect surfaces and any seasoning bottles you may have touched with your hands. Then place the skewered lamb on the notch lowest to the coals and begin roasting. Wrap more twine around the legs to secure the lamb to the skewer. Cook at the lowest level for 30 minutes.<br>
+                  4. When cooking, baste the meat every 15 minutes with various herbs and spices in olive oil.<br>
+                  5. You can expect to roast a 25- to 30-pound lamb for four to five hours. The lamb can be removed from the coals when a meat thermometer inserted into the leg/shoulder registers 170 F (63 C). Allow the meat to rest for at least 15 minutes before carving.<br>
+                </div>
+                 <h2>Tsoureki (Easter Bread)</h2>
+                <div id='ing4'>
+                    <h4>Ingredients</h4>
+                    3/4 cup plus 1 tablespoon whole milk<br>
+                    1 (1/4-ounce) packet active dry yeast (2 1/2 teaspoons)<br>
+                    4 cups all-purpose flour, plus more for dusting<br>
+                    2/3 cup granulated sugar<br>
+                    1 teaspoon fine salt<br>
+                    1 teaspoon ground mahlepi (optional)<br>
+                    1/4 teaspoon pounded mastic crystals (optional)<br>
+                    8 tablespoons unsalted butter (1 stick)<br>
+                    2 large eggs<br>
+                    1 1/2 teaspoons finely grated orange zest (from about 1 orange)<br>
+                    1 red-dyed hard-boiled egg (optional; see Game Plan note)<br>
+                    1 large egg yolk<br>
+                    1/3 cup sliced almonds, toasted
+                </div>
+                <div id='step4'>
+                    <h4>Process</h4>
+                    1. In a small saucepan, heat 3/4 cup of the milk until warm to the touch but not hot (about 105°F to 115°F on an instant-read thermometer). Transfer the warm milk to a large bowl and sprinkle the yeast on top. Set aside for about 15 minutes to activate the yeast.<br>
+                    2. Sift the flour, sugar, salt, mahlepi (if using), and mastic (if using) together into a large bowl; set aside.<br>
+                    3. In a small saucepan, melt 7 tablespoons of the butter. Let the butter cool, then transfer to a medium bowl. Add the eggs and orange zest and beat together. Stir the egg mixture into the yeast mixture until combined.<br>
+                    4. Using a spoon, stir the flour mixture into the yeast-egg mixture until combined. Turn the dough onto a floured work surface and knead until smooth, flouring your hands and the surface as needed, about 10 minutes.<br>
+                    5. Coat a baking sheet and a 16-inch piece of plastic wrap with the remaining 1 tablespoon butter. Set the dough on the baking sheet and cover it with the plastic wrap, butter side down. Let rise in a warm place until doubled in size, about 2 hours.<br>
+                    6. Remove the plastic wrap and set it aside. Divide the dough into 3 equal pieces (about 12 ounces each). Roll the pieces into 1-1/4-by-16-1/2-inch ropes. Pinch all 3 pieces together on one end to secure, then braid the ropes, entwining the red hard-boiled egg (if using) into the bread. Pinch the other end of the ropes together to secure the braid. Set the braided dough on the prepared baking sheet, cover with the buttered plastic wrap (butter side down), and let rise in a warm place until doubled in size, about 1 hour. Meanwhile, heat the oven to 350°F and arrange a rack in the middle.<br>
+                    7. In a small bowl, beat together the egg yolk and remaining 1 tablespoon milk. With a pastry brush, evenly brush the egg mixture over the risen dough, then sprinkle the almonds over top, pressing the nuts gently into the dough. Bake until the bread is browned and the internal temperature reaches 190°F on an instant-read thermometer, about 30 minutes. Let cool before serving.
+                </div>
+                <h2>Koulourakia (Easter Cookies)</h2>
+                <div id='ing5'>
+                    <h4>Ingredients</h4>
+                   1 pound unsalted butter<br>
+                    2 cups sugar<br>
+                    4 eggs<br>
+                    1/2 cup orange juice<br>
+                    1 tsp vanilla<br>
+                    3 tsp baking powder<br>
+                    1/4 baking soda<br>
+                    9 -11 cups sifted flour (give or take)<br>
+                </div>
+                <div id='step5'>
+                    <h4>Process</h4>
+                   1. Cream butter and add sugar slowly.  Add eggs one at a time and beat well.<br>
+                    2. Add orange juice and vanilla to batter, beating well.<br>
+                    3. Sift flour, baking soda and baking powder together and gradually add to the batter.<br>
+                    4. roll out dough in logs and refrigerate for an hour.  Shape cookies.<br>
+                    5. Bake at 350 for about 12 minutes.<br>
+
+                </div>
+                </div>
+                <div class="screen page-content" id='screen3'>
+                    <div id="myDIV" class="header">
+  <h2 style="margin:5px">Prep Day To Do List</h2>
+  <input type="text" id="myInput" placeholder="More Chores...">
+  <span onclick="newElement()" class="addBtn">Add Another</span>
+</div>
+
+<ul id="myUL">
+  <li>Set up the tent</li>
+  <li>Vacuum the house</li>
+  <li>Prepare the lamb</li>
+  <li>Start cooking</li>
+  <li>Bring out the tables</li>
+  <li>Set up the spit</li>
+  <li>Have the table ready for anastasi</li>
+  
+</ul>
+
+            <script>
+            // Create a "close" button and append it to each list item
+            var myNodelist = document.getElementsByTagName("LI");
+            var i;
+            for (i = 0; i < myNodelist.length; i++) {
+              var span = document.createElement("SPAN");
+              var txt = document.createTextNode("\u00D7");
+              span.className = "close";
+              span.appendChild(txt);
+              myNodelist[i].appendChild(span);
+            }
+            
+            // Click on a close button to hide the current list item
+            var close = document.getElementsByClassName("close");
+            var i;
+            for (i = 0; i < close.length; i++) {
+              close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+              }
+            }
+            
+            // Add a "checked" symbol when clicking on a list item
+            var list = document.querySelector('ul');
+            list.addEventListener('click', function(ev) {
+              if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+              }
+            }, false);
+            
+            // Create a new list item when clicking on the "Add" button
+            function newElement() {
+              var li = document.createElement("li");
+              var inputValue = document.getElementById("myInput").value;
+              var t = document.createTextNode(inputValue);
+              li.appendChild(t);
+              if (inputValue === '') {
+                alert("You must write something!");
+              } else {
+                document.getElementById("myUL").appendChild(li);
+              }
+              document.getElementById("myInput").value = "";
+            
+              var span = document.createElement("SPAN");
+              var txt = document.createTextNode("\u00D7");
+              span.className = "close";
+              span.appendChild(txt);
+              li.appendChild(span);
+            
+              for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                  var div = this.parentElement;
+                  div.style.display = "none";
+                }
+              }
+            }
+ </script>                   
+                </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script>
+                
+                
+                    $(function() {
+                        
+                        
+                        $('#screen1').show();
+                        
+
+                        $('.combo1').on('click', function(){
+                            $('.screen').hide()
+                            $('#screen1').show()
+                        });
+                        
+                      
+                        
+                        $('.combo2').on('click', function(){
+                            $('.screen').hide()
+                            $('#screen2').show()
+                        });
+                        
+                      
+                        $('.combo3').on('click', function(){
+                            $('.screen').hide()
+                            $('#screen3').show()
+                        });
+                       
+                        
+                    });
+                </script>
+            </div>
+        </main>
+    </div>
+</body>
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
+</html>
