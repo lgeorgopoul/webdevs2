@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Text Example</title>
+  <style>
+    canvas {
+      border: #333 10px solid;
+    }
+  </style>
+</head>
+ 
+<body>
+  <canvas id="gameCanvas" width="500px" height="300px"></canvas>
+ 
+  <script>
+    var c = document.getElementById("gameCanvas");
+    var cxt = c.getContext("2d");
+    var x = 100, y = 100;
+    
+    
+    cxt.font = "96px Helvetica, Arial, sans-serif";
+    cxt.strokeText("Leo", x, y);
+    
+    window.addEventListener("keydown", moveSomething, false);
+ 
+    function moveSomething(e) {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+             
+    if (e.keyCode == 39) {
+                    x = x + 5;
+                } 
+    if (e.keyCode == 37) {
+                    x = x - 5;
+                }
+                
+    if (e.keyCode == 38) {
+                    y = y - 5;
+                }
+                
+    if (e.keyCode == 40){
+                    y = y + 5;            
+                }
+    }
+  </script>
+ 
+</body>
+ 
+</html>

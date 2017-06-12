@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Mogra" rel="stylesheet">
+    <style>
+     #man{display:none}
+     #fire{display:none}
+     #water{display:none}
+     #refresh{display:none}
+     #background{display:none}
+     .btn {
+      border-radius: 5px;
+      padding: 15px 25px;
+      font-size: 22px;
+      text-decoration: none;
+      margin: 20px;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+     }
+    .btn:active {
+      transform: translate(0px, 5px);
+      -webkit-transform: translate(0px, 5px);
+      box-shadow: 0px 1px 0px 0px;
+    }
+    .red {
+      background-color: #e74c3c;
+      box-shadow: 0px 5px 0px 0px #CE3323;
+    }
+    .red:hover {
+      background-color: #FF6656;
+    }
+    #info1, #info2{
+      text-align: center;
+    }
+   #myCanvas{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+   }
+   #lives, #score, #level, #start2, #pause2, #refresh2{
+     text-align: center;
+   }
+    #info1, #info2 {
+      font-family: 'Mogra';
+      color: #e60000;
+      font-size: 18px;
+    }
+    #info1{
+      font-size: 25px;
+      font-family: 'Mogra', cursive;
+      font-weight: bold;
+    }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Fireman's Quest</title>
+     <div id='info1'>Welcome to Fireman's Quest!</div><div id='info2'>The fireman needs help putting out the fire!<br>Collect the water, and avoid the fire.<br>Every water gives you ten points, and every 50 points you level up, and the fire will move faster.<br>Every time you hit a fire, you lose a life. You have 3 lives.<br> Use the up and down arrow keys to move the fireman.<!--<br>Click the button, or press the spacebar to start and pause the game.--><br>By: Leo Georgopoulos, 2nd Period</div>
+     <div id='start2'><button type='button' id='start'>Hide This</button></div><br>
+    <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;"></canvas>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body background='https://s-media-cache-ak0.pinimg.com/736x/c6/02/dd/c602dda4d38cca8816a7025b581cc908.jpg'>
+   
+    <!--<div id='lives'>Lives Remaining: 3</div>
+    <div id='score'>Points: 0</div>
+    <div id='level'>Level: 1</div>-->
+   <div id='pause2'><button type='button' id='pause' class='btn red'>Start Game</button></div> 
+    <img id="man" src="http://images.clipartpanda.com/firefighter-clipart-fireman.png" alt="fireman" style="width:50px;height:50px;">
+    <img id="fire" src="http://images.clipartpanda.com/fire-clipart-download-free-fire-graphics-clipart-free-clip-art-images.png" alt='fire' style='width:50px;height:50px'>
+    <img id="water" src="http://img.clipartall.com/water-images-clip-art-clipart-water-clipart-512_737.png" alt="water" style="width:50px;height:50px">
+    <img id='background' src='https://s-media-cache-ak0.pinimg.com/originals/f5/5b/cd/f55bcd72e5c06aa384c086615c1b672a.jpg' alt='firehouse'>
+    <div id='refresh2'><input type="button" onClick="history.go(0)" value="New Game?" id='refresh' class='btn red'></input></div>
+    <script>
+    $("#start").on("click", function() {
+    $('#info2').hide()
+    $('#start').hide()
+    })  ;  
+    
+     window.onload = function() {
+      var livesRemaining = 3;
+      var score = 0;
+      var level = 1;
+      var paused = true;
+      var player = {x: 0, y: 0, costume: "", speed: 1};
+      var harm = {x: 0, y: 0, costume: "", speed: 1};
+      var benefit = {x: 0, y: 0, costume: "", speed: 1};
+      /*
+      
+        main animation loop
+      
+      */
+      
+      
+     
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = document.getElementById("man");
+      player.x = 0 ;
+      player.y = 100;
+      ctx.drawImage(img, player.x, player.y, 50, 50);
+      
+      
+      var harmer = document.getElementById("fire");
+      harm.x = 250;
+      harm.y = Math.floor(Math.random() * 275);
+      harm.speed = 1;
+      
+      var helper = document.getElementById("water");
+      benefit.x = 250;
+      benefit.y = Math.floor(Math.random() * 275) ;
+      benefit.speed = 1;
+      
+      
+      var background = document.getElementById("background");
+      
+      function animate() {
+        
+        ctx.clearRect(0,0,c.width,c.height);
+        // update harm and benefit x coordinates
+        harm.x = harm.x - harm.speed;
+        // draw background
+        ctx.drawImage(background, 0, 0, c.width, c.height);
+        //  draw player
+        ctx.drawImage(img, player.x, player.y, 50, 50);
+        // draw harm 
+        ctx.drawImage(harmer, harm.x , harm.y, 25, 25);
+        // check for and handle edge condition
+        ctx.font = '15px Arial';
+        ctx.fillStyle = "red";
+        ctx.textAlign = 'center'
+        ctx.fillText("Score: " + score + ", Level: " + level + ", Lives Remaining: "+ livesRemaining, c.width/2, 15);
+        
+        if (harm.x < 0 )
+        {
+          harm.x = c.width;
+          harm.y = Math.floor(Math.random() * 275);
+        }
+        // check for and handle harm collision
+        if (Math.abs(harm.y - player.y) < 35 && player.x === harm.x )
+        {
+          livesRemaining = livesRemaining - 1;
+          $('#lives').empty()
+          $('#lives').append('Lives Remaining: ' + livesRemaining)
+        }
+        
+        // draw benefit
+        ctx.drawImage(helper, benefit.x , benefit.y, 25, 25);
+        // check for and handle edge condition
+        benefit.x = benefit.x - benefit.speed;
+        
+        if (benefit.x < 0 )
+        {
+          benefit.x = c.width;
+          benefit.y = Math.floor(Math.random() * 275);
+        }
+        // check for benefit collision
+        if (Math.abs(benefit.y - player.y) < 35 && player.x == benefit.x )
+        {
+        score = score + 10;
+        console.log(score);
+        $('#score').empty()
+        $('#score').append('Points: ' + score)
+        }
+        // draw text (lives and score)
+        if (score == 50 * level)
+        {
+        level = level + 1  ;
+        harm.speed = harm.speed + (level / level / 2);
+        $("#level").empty()
+        $('#level').append("Level: " + level)
+        console.log(harm.speed);
+        console.log(level);
+        }
+        //  if the game has not been paused, 
+        if (paused == false && livesRemaining > 0) {
+          requestAnimationFrame(animate);
+        }
+        if (livesRemaining <= 0) {
+          $('#lives').empty()
+          $('#score').empty()
+          $('#level').empty()
+          $('#refresh').show()
+          $('#info1').empty()
+          $('#info2').hide()
+          $('#start').hide()
+          $('#pause').hide()
+          ctx.clearRect(0,0,c.width,c.height);
+          ctx.font = '50px Arial';
+          ctx.fillStyle = "red";
+          ctx.textAlign = "center";
+          ctx.fillText("You Lose", c.width/2, 50);
+          ctx.fillText("Score: "+ score, c.width/2, 150);
+          ctx.fillText("Level: " + level, c.width/2, 250); 
+          }
+       
+      }
+      
+      
+      animate();
+      
+       document.getElementById("pause").onclick = function (){
+          paused = !paused;
+          $('#pause').empty()
+          $('#pause').append('Resume Game')
+          console.log(paused);
+          if (paused == false){
+          requestAnimationFrame(animate);
+          $('#pause').empty()
+          $('#pause').append('Pause Game')
+          }
+        };
+      
+      
+       document.addEventListener("keydown", move );
+        function move (e) {
+          
+         
+          if (e.keyCode == 40 && player.y < 250){
+            player.y = player.y + 3 ;
+          }
+          if (e.keyCode == 38 && player.y > 0){
+            player.y = player.y - 3 ;
+          }
+          //if (e.keyCode == 32){
+            //paused = !paused;
+            //$('#pause').empty()
+            //$('#pause').append('Resume Game')
+            //console.log(paused);
+            //if (paused == false){
+            //requestAnimationFrame(animate);
+            //$('#pause').empty()
+            //$('#pause').append('Pause Game')
+            //}
+          //}
+          
+          
+          
+        }
+      
+     
+      
+      
+      
+     };
+      
+    </script>
+    
+    
+  </body>
+</html>
